@@ -1,1 +1,337 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Bangla Earn Hub</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#080808;
+  color:#fff;
+}
+
+.app{
+  max-width:480px;
+  min-height:100vh;
+  margin:auto;
+  background:#111;
+  padding-bottom:80px;
+}
+
+header{
+  padding:20px;
+  background:#171717;
+  border-bottom:1px solid #292929;
+}
+
+header h1{
+  font-size:24px;
+}
+
+header p{
+  color:#aaa;
+  margin-top:5px;
+}
+
+.balance{
+  margin:18px;
+  padding:22px;
+  border-radius:16px;
+  background:#202020;
+  text-align:center;
+}
+
+.balance small{
+  color:#aaa;
+}
+
+.balance h2{
+  font-size:36px;
+  margin:8px 0;
+}
+
+.balance button{
+  border:0;
+  padding:10px 20px;
+  border-radius:10px;
+  background:#fff;
+  color:#111;
+  font-weight:bold;
+}
+
+.section{
+  padding:0 18px;
+}
+
+.section h3{
+  margin:10px 0 14px;
+}
+
+.task{
+  background:#1b1b1b;
+  padding:16px;
+  border-radius:14px;
+  margin-bottom:12px;
+  border:1px solid #292929;
+}
+
+.task h4{
+  margin-bottom:7px;
+}
+
+.task p{
+  color:#aaa;
+  font-size:14px;
+  margin-bottom:12px;
+}
+
+.task button{
+  width:100%;
+  padding:11px;
+  border:0;
+  border-radius:9px;
+  background:#fff;
+  color:#111;
+  font-weight:bold;
+}
+
+.withdraw{
+  margin:18px;
+  padding:18px;
+  border-radius:14px;
+  background:#1b1b1b;
+}
+
+.withdraw input,
+.withdraw select{
+  width:100%;
+  padding:12px;
+  margin-top:9px;
+  margin-bottom:12px;
+  border:1px solid #333;
+  border-radius:9px;
+  background:#101010;
+  color:#fff;
+}
+
+.withdraw button{
+  width:100%;
+  padding:12px;
+  border:0;
+  border-radius:9px;
+  background:#fff;
+  color:#111;
+  font-weight:bold;
+}
+
+nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:480px;
+  display:flex;
+  justify-content:space-around;
+  background:#171717;
+  border-top:1px solid #292929;
+  padding:12px 5px;
+}
+
+nav button{
+  background:none;
+  border:0;
+  color:#aaa;
+  font-size:13px;
+}
+
+nav button.active{
+  color:#fff;
+}
+
+.message{
+  text-align:center;
+  color:#aaa;
+  margin-top:10px;
+  min-height:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <h1>Bangla Earn Hub</h1>
+  <p>কাজ করুন • পয়েন্ট সংগ্রহ করুন</p>
+</header>
+
+<div class="balance">
+  <small>আপনার ব্যালেন্স</small>
+  <h2>৳ <span id="balance">0.00</span></h2>
+  <button onclick="showBalance()">ব্যালেন্স দেখুন</button>
+</div>
+
+<div class="section">
+
+<h3>আজকের কাজ</h3>
+
+<div class="task">
+  <h4>📝 ছোট কাজ</h4>
+  <p>ডেমো টাস্ক সম্পন্ন করলে আপনার ডেমো ব্যালেন্সে ৳১ যোগ হবে।</p>
+  <button onclick="completeTask(1)">কাজ সম্পন্ন করুন</button>
+</div>
+
+<div class="task">
+  <h4>🌐 ওয়েবসাইট ভিজিট</h4>
+  <p>এই অংশটি এখন ডেমো হিসেবে রাখা হয়েছে।</p>
+  <button onclick="completeTask(3)">কাজ সম্পন্ন করুন</button>
+</div>
+
+<div class="task">
+  <h4>🎬 ভিডিও টাস্ক</h4>
+  <p>ভিডিও/বিজ্ঞাপন সরবরাহকারী যুক্ত হলে এখানে আসল টাস্ক বসানো যাবে।</p>
+  <button onclick="completeTask(5)">কাজ সম্পন্ন করুন</button>
+</div>
+
+</div>
+
+<div class="withdraw">
+
+<h3>💳 Withdraw</h3>
+
+<select id="method">
+  <option value="bkash">বিকাশ</option>
+  <option value="nagad">নগদ</option>
+</select>
+
+<input
+  id="number"
+  type="text"
+  placeholder="বিকাশ/নগদ নম্বর">
+
+<input
+  id="amount"
+  type="number"
+  placeholder="টাকার পরিমাণ">
+
+<button onclick="withdraw()">উইথড্র রিকোয়েস্ট</button>
+
+<div class="message" id="message"></div>
+
+</div>
+
+<nav>
+  <button class="active">🏠<br>হোম</button>
+  <button onclick="goTask()">📋<br>টাস্ক</button>
+  <button onclick="goWithdraw()">💳<br>উইথড্র</button>
+  <button onclick="profile()">👤<br>প্রোফাইল</button>
+</nav>
+
+</div>
+
+<script>
+
+let balance = Number(localStorage.getItem("balance") || 0);
+
+function updateBalance(){
+  document.getElementById("balance").innerText =
+    balance.toFixed(2);
+
+  localStorage.setItem("balance", balance);
+}
+
+function showBalance(){
+  alert("আপনার বর্তমান ব্যালেন্স: ৳ " + balance.toFixed(2));
+}
+
+function completeTask(amount){
+
+  balance += amount;
+
+  updateBalance();
+
+  alert(
+    "ডেমো টাস্ক সম্পন্ন হয়েছে!\n৳ " +
+    amount.toFixed(2) +
+    " ব্যালেন্সে যোগ হয়েছে।"
+  );
+}
+
+function withdraw(){
+
+  let number =
+    document.getElementById("number").value.trim();
+
+  let amount =
+    Number(document.getElementById("amount").value);
+
+  let message =
+    document.getElementById("message");
+
+  if(!number || !amount){
+    message.innerText =
+      "⚠️ নম্বর ও টাকার পরিমাণ দিন।";
+    return;
+  }
+
+  if(amount <= 0){
+    message.innerText =
+      "⚠️ সঠিক টাকার পরিমাণ দিন।";
+    return;
+  }
+
+  if(amount > balance){
+    message.innerText =
+      "❌ আপনার ব্যালেন্স যথেষ্ট নয়।";
+    return;
+  }
+
+  message.innerText =
+    "✅ ডেমো রিকোয়েস্ট গ্রহণ করা হয়েছে।";
+
+  /*
+    এখানে এখনো আসল টাকা পাঠানো হচ্ছে না।
+    আসল bKash/Nagad payment API যুক্ত করার
+    জন্য backend/server প্রয়োজন।
+  */
+}
+
+function goTask(){
+  window.scrollTo({
+    top:250,
+    behavior:"smooth"
+  });
+}
+
+function goWithdraw(){
+  window.scrollTo({
+    top:700,
+    behavior:"smooth"
+  });
+}
+
+function profile(){
+  alert(
+    "Profile\n\n" +
+    "Bangla Earn Hub\n" +
+    "আপনার প্রোফাইল এখানে থাকবে।"
+  );
+}
+
+updateBalance();
+
+</script>
+
+</body>
+</html>
