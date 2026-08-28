@@ -1,1 +1,446 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>দিয়াকুল | আমাদের এলাকা</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#f5f7fa;
+  color:#222;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#ffffff;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.nav{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:bold;
+  color:#087f5b;
+}
+
+.logo span{
+  color:#f08c00;
+}
+
+.menu{
+  display:flex;
+  gap:18px;
+}
+
+.menu a{
+  text-decoration:none;
+  color:#333;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.menu a:hover{
+  color:#087f5b;
+}
+
+.hero{
+  min-height:520px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:60px 18px;
+  background:
+    linear-gradient(rgba(0,70,50,.72),rgba(0,70,50,.72)),
+    linear-gradient(135deg,#087f5b,#0ca678);
+  color:white;
+}
+
+.hero-content{
+  max-width:700px;
+}
+
+.hero h1{
+  font-size:46px;
+  margin-bottom:15px;
+}
+
+.hero h2{
+  font-size:24px;
+  margin-bottom:12px;
+}
+
+.hero p{
+  font-size:16px;
+  line-height:1.8;
+  color:#eefaf5;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:25px;
+  padding:13px 24px;
+  background:#f08c00;
+  color:white;
+  text-decoration:none;
+  border-radius:30px;
+  font-weight:bold;
+}
+
+section{
+  max-width:1100px;
+  margin:auto;
+  padding:55px 18px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.title h2{
+  font-size:28px;
+  color:#087f5b;
+}
+
+.title p{
+  color:#777;
+  margin-top:7px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:white;
+  padding:25px 20px;
+  border-radius:16px;
+  box-shadow:0 5px 20px rgba(0,0,0,.07);
+  text-align:center;
+}
+
+.icon{
+  font-size:40px;
+  margin-bottom:12px;
+}
+
+.card h3{
+  margin-bottom:8px;
+  color:#333;
+}
+
+.card p{
+  color:#777;
+  line-height:1.7;
+  font-size:14px;
+}
+
+.about{
+  background:white;
+  max-width:none;
+}
+
+.about-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:55px 18px;
+  text-align:center;
+}
+
+.about-inner p{
+  max-width:750px;
+  margin:15px auto 0;
+  line-height:1.9;
+  color:#666;
+}
+
+.contact-box{
+  max-width:600px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:16px;
+  box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+.contact-item{
+  padding:14px 0;
+  border-bottom:1px solid #eee;
+}
+
+.contact-item:last-child{
+  border-bottom:0;
+}
+
+.contact-item strong{
+  color:#087f5b;
+}
+
+footer{
+  background:#102a24;
+  color:#ddd;
+  text-align:center;
+  padding:25px 15px;
+}
+
+footer h3{
+  color:white;
+  margin-bottom:8px;
+}
+
+footer p{
+  font-size:13px;
+  color:#aaa;
+}
+
+@media(max-width:650px){
+
+  .menu{
+    gap:9px;
+  }
+
+  .menu a{
+    font-size:12px;
+  }
+
+  .hero{
+    min-height:470px;
+  }
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .hero h2{
+    font-size:20px;
+  }
+
+  section{
+    padding:45px 15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+    <div class="logo">
+      দিয়াকুল<span>।</span>
+    </div>
+
+    <nav class="menu">
+      <a href="#home">হোম</a>
+      <a href="#about">পরিচিতি</a>
+      <a href="#service">সেবা</a>
+      <a href="#contact">যোগাযোগ</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<!-- HOME -->
+
+<div class="hero" id="home">
+
+  <div class="hero-content">
+
+    <h1>দিয়াকুল</h1>
+
+    <h2>আমাদের এলাকা, আমাদের পরিচয়</h2>
+
+    <p>
+      দিয়াকুলের মানুষ, ইতিহাস, সেবা ও
+      গুরুত্বপূর্ণ তথ্য এক জায়গায় তুলে ধরার
+      জন্য একটি সুন্দর অনলাইন প্ল্যাটফর্ম।
+    </p>
+
+    <a class="btn" href="#about">
+      আরও জানুন
+    </a>
+
+  </div>
+
+</div>
+
+
+<!-- ABOUT -->
+
+<div class="about" id="about">
+
+  <div class="about-inner">
+
+    <div class="title">
+      <h2>দিয়াকুল সম্পর্কে</h2>
+      <p>আমাদের এলাকার কথা, আমাদের সবার জন্য</p>
+    </div>
+
+    <p>
+      দিয়াকুল একটি স্থানীয় অনলাইন প্ল্যাটফর্ম।
+      এখানে এলাকার প্রয়োজনীয় তথ্য, মানুষের
+      জন্য বিভিন্ন সেবা এবং গুরুত্বপূর্ণ
+      বিষয়গুলো সুন্দরভাবে তুলে ধরা হবে।
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- SERVICES -->
+
+<section id="service">
+
+  <div class="title">
+
+    <h2>আমাদের সেবা</h2>
+
+    <p>
+      এলাকার মানুষের প্রয়োজনীয় তথ্য ও সুবিধা
+    </p>
+
+  </div>
+
+
+  <div class="cards">
+
+    <div class="card">
+
+      <div class="icon">📢</div>
+
+      <h3>স্থানীয় সংবাদ</h3>
+
+      <p>
+        এলাকার গুরুত্বপূর্ণ খবর ও
+        ঘোষণাগুলো সহজভাবে প্রকাশ করা।
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">🏠</div>
+
+      <h3>এলাকার তথ্য</h3>
+
+      <p>
+        গুরুত্বপূর্ণ স্থান, প্রতিষ্ঠান ও
+        প্রয়োজনীয় তথ্য এক জায়গায়।
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">🤝</div>
+
+      <h3>সামাজিক কার্যক্রম</h3>
+
+      <p>
+        মানুষের কল্যাণে বিভিন্ন সামাজিক
+        কার্যক্রম ও উদ্যোগ তুলে ধরা।
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">📞</div>
+
+      <h3>যোগাযোগ</h3>
+
+      <p>
+        প্রয়োজনীয় ব্যক্তি ও সেবার
+        যোগাযোগের তথ্য সংরক্ষণ করা।
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+  <div class="title">
+
+    <h2>যোগাযোগ</h2>
+
+    <p>
+      দিয়াকুল সম্পর্কে জানতে আমাদের সঙ্গে যোগাযোগ করুন
+    </p>
+
+  </div>
+
+
+  <div class="contact-box">
+
+    <div class="contact-item">
+      <strong>📍 ঠিকানা:</strong>
+      দিয়াকুল
+    </div>
+
+    <div class="contact-item">
+      <strong>📱 মোবাইল:</strong>
+      আপনার মোবাইল নম্বর এখানে বসবে
+    </div>
+
+    <div class="contact-item">
+      <strong>✉️ ই-মেইল:</strong>
+      আপনার ই-মেইল এখানে বসবে
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer>
+
+  <h3>দিয়াকুল</h3>
+
+  <p>
+    © 2026 দিয়াকুল — সর্বস্বত্ব সংরক্ষিত
+  </p>
+
+</footer>
+
+
+</body>
+</html>
