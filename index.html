@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>দিয়াকুল</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -22,9 +20,9 @@ body{
 }
 
 .header{
-    text-align:center;
-    padding:18px;
     background:#111;
+    padding:18px;
+    text-align:center;
     border-bottom:1px solid #292929;
 }
 
@@ -58,10 +56,6 @@ body{
     margin-bottom:18px;
 }
 
-.balance small{
-    font-size:14px;
-}
-
 .amount{
     font-size:32px;
     font-weight:bold;
@@ -77,39 +71,25 @@ body{
 }
 
 .card h3{
-    margin-bottom:8px;
+    margin-bottom:10px;
 }
 
 .card p{
     color:#aaa;
     font-size:14px;
     line-height:1.6;
-    margin-bottom:10px;
-}
-
-.notice{
-    background:#171717;
-    border-left:4px solid #00e676;
-    padding:14px;
-    border-radius:10px;
-    margin-bottom:18px;
-    line-height:1.7;
 }
 
 button{
     width:100%;
     border:0;
     padding:13px;
+    margin-top:10px;
     border-radius:10px;
     background:#00e676;
     color:#000;
     font-size:16px;
     font-weight:bold;
-    cursor:pointer;
-}
-
-button:active{
-    transform:scale(.98);
 }
 
 input,
@@ -133,26 +113,50 @@ select{
     background:#111;
     border-top:1px solid #333;
     display:flex;
-    justify-content:space-around;
     z-index:100;
 }
 
 .nav button{
     width:25%;
+    margin:0;
+    padding:7px 2px;
     background:transparent;
     color:#999;
     font-size:12px;
-    padding:7px 2px;
 }
 
 .nav button.active{
     color:#00e676;
 }
 
-.history{
+.admin-title{
+    color:#00e676;
+    margin-bottom:15px;
+}
+
+.stat{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.stat-box{
+    background:#151515;
+    border:1px solid #292929;
+    padding:18px;
+    border-radius:14px;
+}
+
+.stat-box strong{
+    display:block;
+    font-size:24px;
+    margin-top:7px;
+}
+
+.task-row{
     background:#101010;
     border:1px solid #292929;
-    padding:13px;
+    padding:14px;
     border-radius:10px;
     margin-top:10px;
 }
@@ -160,181 +164,94 @@ select{
 .success{
     color:#00e676 !important;
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-
 <div class="header">
-    <div class="logo">
-        দিয়া<span>কুল</span>
-    </div>
+    <div class="logo">দিয়া<span>কুল</span></div>
 </div>
-
 
 <div class="container">
 
-
-<!-- ================= HOME ================= -->
-
+<!-- HOME -->
 <div id="home" class="page active">
 
     <div class="balance">
-
         <small>আপনার ব্যালেন্স</small>
-
         <div class="amount">
             ৳ <span id="balance">0.00</span>
         </div>
-
     </div>
-
-
-    <div class="notice">
-
-        🎉 <b>দিয়াকুলে স্বাগতম!</b>
-
-        <br>
-
-        বিভিন্ন টাস্ক সম্পন্ন করে রিওয়ার্ড সংগ্রহ করুন।
-
-    </div>
-
 
     <div class="card">
-
         <h3>📺 ভিডিও টাস্ক</h3>
-
-        <p>
-            নির্ধারিত ভিডিও দেখে টাস্ক সম্পন্ন করুন।
-        </p>
-
+        <p>ভিডিও টাস্ক সম্পন্ন করে ডেমো রিওয়ার্ড পান।</p>
         <button onclick="completeTask(5)">
             টাস্ক শুরু করুন — ৳৫
         </button>
-
     </div>
 
-
     <div class="card">
-
         <h3>🌐 ওয়েবসাইট ভিজিট</h3>
-
-        <p>
-            নির্ধারিত ওয়েবসাইট ভিজিট করে টাস্ক সম্পন্ন করুন।
-        </p>
-
+        <p>ওয়েবসাইট ভিজিট করে ডেমো রিওয়ার্ড পান।</p>
         <button onclick="completeTask(3)">
             টাস্ক শুরু করুন — ৳৩
         </button>
-
     </div>
 
 </div>
 
 
-
-<!-- ================= TASK ================= -->
-
+<!-- TASKS -->
 <div id="tasks" class="page">
 
-    <h2 style="margin-bottom:15px;">
-        📋 টাস্ক
-    </h2>
+    <h2 style="margin-bottom:15px;">📋 টাস্ক</h2>
 
+    <div id="taskList">
 
-    <div class="card">
+        <div class="card">
+            <h3>📺 ভিডিও দেখুন</h3>
+            <p>ভিডিও টাস্ক সম্পন্ন করুন।</p>
+            <button onclick="completeTask(5)">
+                ৳৫ সংগ্রহ করুন
+            </button>
+        </div>
 
-        <h3>📺 ভিডিও দেখুন</h3>
-
-        <p>
-            ভিডিও টাস্ক সম্পন্ন করে রিওয়ার্ড পান।
-        </p>
-
-        <button onclick="completeTask(5)">
-            ৳৫ সংগ্রহ করুন
-        </button>
-
-    </div>
-
-
-    <div class="card">
-
-        <h3>🌐 ওয়েবসাইট ভিজিট</h3>
-
-        <p>
-            ওয়েবসাইট ভিজিট করে টাস্ক সম্পন্ন করুন।
-        </p>
-
-        <button onclick="completeTask(3)">
-            ৳৩ সংগ্রহ করুন
-        </button>
-
-    </div>
-
-
-    <div class="card">
-
-        <h3>📝 সাধারণ টাস্ক</h3>
-
-        <p>
-            নতুন টাস্ক পরবর্তীতে এখানে যোগ করা যাবে।
-        </p>
-
-        <button onclick="alert('এই টাস্কটি এখনো প্রস্তুত করা হয়নি।')">
-            বিস্তারিত দেখুন
-        </button>
-
-    </div>
-
-</div>
-
-
-
-<!-- ================= WITHDRAW ================= -->
-
-<div id="withdraw" class="page">
-
-    <h2 style="margin-bottom:15px;">
-        💸 টাকা উত্তোলন
-    </h2>
-
-
-    <div class="balance">
-
-        <small>
-            উত্তোলনযোগ্য ব্যালেন্স
-        </small>
-
-        <div class="amount">
-            ৳ <span id="withdrawBalance">0.00</span>
+        <div class="card">
+            <h3>🌐 ওয়েবসাইট ভিজিট</h3>
+            <p>ওয়েবসাইট ভিজিট করুন।</p>
+            <button onclick="completeTask(3)">
+                ৳৩ সংগ্রহ করুন
+            </button>
         </div>
 
     </div>
 
+</div>
+
+
+<!-- WITHDRAW -->
+<div id="withdraw" class="page">
+
+    <h2 style="margin-bottom:15px;">💸 টাকা উত্তোলন</h2>
+
+    <div class="balance">
+        <small>উত্তোলনযোগ্য ব্যালেন্স</small>
+        <div class="amount">
+            ৳ <span id="withdrawBalance">0.00</span>
+        </div>
+    </div>
 
     <div class="card">
 
-        <h3>
-            💳 পেমেন্ট মাধ্যম
-        </h3>
-
+        <h3>💳 পেমেন্ট মাধ্যম</h3>
 
         <select id="method">
-
-            <option value="বিকাশ">
-                বিকাশ
-            </option>
-
-            <option value="নগদ">
-                নগদ
-            </option>
-
+            <option>বিকাশ</option>
+            <option>নগদ</option>
         </select>
-
 
         <input
             type="tel"
@@ -342,14 +259,11 @@ select{
             placeholder="মোবাইল নম্বর"
         >
 
-
         <input
             type="number"
             id="withdrawAmount"
             placeholder="কত টাকা তুলবেন?"
-            min="1"
         >
-
 
         <button onclick="requestWithdraw()">
             উত্তোলনের অনুরোধ করুন
@@ -357,59 +271,22 @@ select{
 
     </div>
 
-
     <div class="card">
-
-        <h3>
-            📌 উত্তোলনের নিয়ম
-        </h3>
-
-        <p>
-            • সঠিক মোবাইল নম্বর দিতে হবে।
-        </p>
-
-        <p>
-            • ব্যালেন্সের বেশি টাকা চাওয়া যাবে না।
-        </p>
-
-        <p>
-            • উত্তোলনের অনুরোধ এখানে ডেমো হিসেবে সংরক্ষণ হবে।
-        </p>
-
-    </div>
-
-
-    <div class="card">
-
-        <h3>
-            📋 উত্তোলনের ইতিহাস
-        </h3>
-
+        <h3>📋 উত্তোলনের ইতিহাস</h3>
         <div id="history">
-            এখনো কোনো উত্তোলনের অনুরোধ নেই।
+            এখনো কোনো অনুরোধ নেই।
         </div>
-
     </div>
 
 </div>
 
 
-
-<!-- ================= PROFILE ================= -->
-
+<!-- PROFILE -->
 <div id="profile" class="page">
 
-    <h2 style="margin-bottom:15px;">
-        👤 প্রোফাইল
-    </h2>
-
+    <h2 style="margin-bottom:15px;">👤 প্রোফাইল</h2>
 
     <div class="card">
-
-        <h3>
-            আপনার তথ্য
-        </h3>
-
 
         <input
             type="text"
@@ -417,13 +294,11 @@ select{
             placeholder="আপনার নাম"
         >
 
-
         <input
             type="tel"
             id="phone"
             placeholder="মোবাইল নম্বর"
         >
-
 
         <button onclick="saveProfile()">
             তথ্য সংরক্ষণ করুন
@@ -431,27 +306,89 @@ select{
 
     </div>
 
+</div>
+
+
+<!-- ADMIN -->
+<div id="admin" class="page">
+
+    <h2 class="admin-title">
+        🔐 Admin Dashboard
+    </h2>
+
+    <div class="stat">
+
+        <div class="stat-box">
+            👥 ইউজার
+            <strong id="userCount">1</strong>
+        </div>
+
+        <div class="stat-box">
+            📋 টাস্ক
+            <strong id="taskCount">2</strong>
+        </div>
+
+        <div class="stat-box">
+            💸 Withdraw
+            <strong id="withdrawCount">0</strong>
+        </div>
+
+        <div class="stat-box">
+            💰 Reward
+            <strong id="totalReward">0</strong>
+        </div>
+
+    </div>
+
+
+    <div class="card" style="margin-top:15px;">
+
+        <h3>➕ নতুন টাস্ক যোগ করুন</h3>
+
+        <input
+            type="text"
+            id="newTaskName"
+            placeholder="টাস্কের নাম"
+        >
+
+        <input
+            type="number"
+            id="newTaskReward"
+            placeholder="রিওয়ার্ড টাকা"
+        >
+
+        <button onclick="addTask()">
+            টাস্ক যোগ করুন
+        </button>
+
+    </div>
+
 
     <div class="card">
 
-        <h3>
-            💰 বর্তমান ব্যালেন্স
-        </h3>
+        <h3>📋 বর্তমান টাস্ক</h3>
 
-        <p class="success">
-            ৳ <span id="profileBalance">0.00</span>
-        </p>
+        <div id="adminTaskList"></div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>💸 Withdraw Requests</h3>
+
+        <div id="adminWithdrawList">
+            এখনো কোনো Withdraw Request নেই।
+        </div>
 
     </div>
 
 </div>
 
-
 </div>
 
 
-
-<!-- ================= NAVIGATION ================= -->
+<!-- NAVIGATION -->
 
 <div class="nav">
 
@@ -459,62 +396,60 @@ select{
         class="active"
         onclick="showPage('home',this)"
     >
-        🏠
-        <br>
-        হোম
+        🏠<br>হোম
     </button>
-
 
     <button
         onclick="showPage('tasks',this)"
     >
-        📋
-        <br>
-        টাস্ক
+        📋<br>টাস্ক
     </button>
-
 
     <button
         onclick="showPage('withdraw',this)"
     >
-        💸
-        <br>
-        উত্তোলন
+        💸<br>উত্তোলন
     </button>
-
 
     <button
         onclick="showPage('profile',this)"
     >
-        👤
-        <br>
-        প্রোফাইল
+        👤<br>প্রোফাইল
     </button>
 
 </div>
 
 
-
 <script>
 
-/* ================= BALANCE ================= */
-
 let balance =
-    Number(
-        localStorage.getItem("diyakool_balance")
-    ) || 0;
+Number(localStorage.getItem("diyakool_balance")) || 0;
 
+let tasks =
+JSON.parse(localStorage.getItem("diyakool_tasks")) || [
+    {
+        name:"ভিডিও দেখুন",
+        reward:5
+    },
+    {
+        name:"ওয়েবসাইট ভিজিট",
+        reward:3
+    }
+];
+
+let withdrawals =
+JSON.parse(localStorage.getItem("diyakool_withdrawals")) || [];
+
+
+/* BALANCE */
 
 function updateBalance(){
 
     document.getElementById("balance")
-        .innerText = balance.toFixed(2);
+    .innerText = balance.toFixed(2);
 
     document.getElementById("withdrawBalance")
-        .innerText = balance.toFixed(2);
-
-    document.getElementById("profileBalance")
-        .innerText = balance.toFixed(2);
+    .innerText = balance.toFixed(2);
 
     localStorage.setItem(
         "diyakool_balance",
@@ -523,136 +458,103 @@ function updateBalance(){
 }
 
 
-
-/* ================= TASK ================= */
+/* TASK COMPLETE */
 
 function completeTask(amount){
 
-    let confirmTask =
+    if(
         confirm(
             "আপনি কি এই টাস্কটি সম্পন্ন করতে চান?"
+        )
+    ){
+
+        balance += amount;
+
+        updateBalance();
+
+        alert(
+            "ডেমো টাস্ক সম্পন্ন হয়েছে। ৳" +
+            amount +
+            " যোগ হয়েছে।"
         );
 
-    if(!confirmTask){
-        return;
     }
-
-
-    alert(
-        "ডেমো টাস্ক সম্পন্ন হয়েছে।"
-    );
-
-
-    balance += amount;
-
-    updateBalance();
-
 }
 
 
-
-/* ================= PAGE ================= */
+/* PAGE */
 
 function showPage(page,button){
 
     document
-        .querySelectorAll(".page")
-        .forEach(function(p){
+    .querySelectorAll(".page")
+    .forEach(function(p){
 
-            p.classList.remove("active");
+        p.classList.remove("active");
 
-        });
-
-
-    document
-        .getElementById(page)
-        .classList.add("active");
-
+    });
 
     document
-        .querySelectorAll(".nav button")
-        .forEach(function(b){
+    .getElementById(page)
+    .classList.add("active");
 
-            b.classList.remove("active");
+    document
+    .querySelectorAll(".nav button")
+    .forEach(function(b){
 
-        });
+        b.classList.remove("active");
 
+    });
 
     button.classList.add("active");
 
 }
 
 
-
-/* ================= WITHDRAW ================= */
+/* WITHDRAW */
 
 function requestWithdraw(){
 
     let method =
-        document
-        .getElementById("method")
-        .value;
-
+    document.getElementById("method").value;
 
     let number =
-        document
-        .getElementById("withdrawNumber")
-        .value
-        .trim();
-
+    document
+    .getElementById("withdrawNumber")
+    .value.trim();
 
     let amount =
-        Number(
-            document
-            .getElementById("withdrawAmount")
-            .value
-        );
+    Number(
+        document
+        .getElementById("withdrawAmount")
+        .value
+    );
 
 
-    if(!number){
+    if(number.length < 11){
 
-        alert(
-            "মোবাইল নম্বর দিন।"
-        );
-
+        alert("সঠিক মোবাইল নম্বর দিন।");
         return;
+
     }
 
 
-    if(
-        number.length < 11
-    ){
+    if(amount <= 0){
 
-        alert(
-            "সঠিক মোবাইল নম্বর দিন।"
-        );
-
+        alert("সঠিক টাকার পরিমাণ দিন।");
         return;
+
     }
 
 
-    if(
-        !amount ||
-        amount <= 0
-    ){
-
-        alert(
-            "সঠিক টাকার পরিমাণ দিন।"
-        );
-
-        return;
-    }
-
-
-    if(
-        amount > balance
-    ){
+    if(amount > balance){
 
         alert(
             "আপনার ব্যালেন্সের চেয়ে বেশি টাকা তুলতে পারবেন না।"
         );
 
         return;
+
     }
 
 
@@ -661,76 +563,242 @@ function requestWithdraw(){
     updateBalance();
 
 
-    let history =
-        document
-        .getElementById("history");
+    let request = {
+
+        method:method,
+        number:number,
+        amount:amount,
+        status:"Pending"
+
+    };
 
 
-    history.innerHTML =
-        `
-        <div class="history">
-            মাধ্যম: ${method}<br>
-            নম্বর: ${number}<br>
-            পরিমাণ: ৳${amount.toFixed(2)}
-            <br>
-            <span class="success">
-                স্ট্যাটাস: অনুরোধ করা হয়েছে
-            </span>
-        </div>
-        `;
+    withdrawals.push(request);
 
-
-    document
-        .getElementById("withdrawNumber")
-        .value = "";
+    localStorage.setItem(
+        "diyakool_withdrawals",
+        JSON.stringify(withdrawals)
+    );
 
 
     document
-        .getElementById("withdrawAmount")
-        .value = "";
+    .getElementById("withdrawNumber")
+    .value = "";
 
+    document
+    .getElementById("withdrawAmount")
+    .value = "";
+
+
+    renderWithdrawals();
 
     alert(
-        "উত্তোলনের অনুরোধ গ্রহণ করা হয়েছে।"
+        "Withdraw Request গ্রহণ করা হয়েছে।"
     );
 
 }
 
 
+/* ADD TASK */
 
-/* ================= PROFILE ================= */
-
-function saveProfile(){
+function addTask(){
 
     let name =
-        document
-        .getElementById("name")
-        .value
-        .trim();
+    document
+    .getElementById("newTaskName")
+    .value.trim();
 
-
-    let phone =
+    let reward =
+    Number(
         document
-        .getElementById("phone")
+        .getElementById("newTaskReward")
         .value
-        .trim();
+    );
 
 
     if(!name){
 
-        alert(
-            "আপনার নাম লিখুন।"
+        alert("টাস্কের নাম লিখুন।");
+        return;
+
+    }
+
+
+    if(reward <= 0){
+
+        alert("সঠিক Reward দিন।");
+        return;
+
+    }
+
+
+    tasks.push({
+
+        name:name,
+        reward:reward
+
+    });
+
+
+    localStorage.setItem(
+        "diyakool_tasks",
+        JSON.stringify(tasks)
+    );
+
+
+    document
+    .getElementById("newTaskName")
+    .value = "";
+
+    document
+    .getElementById("newTaskReward")
+    .value = "";
+
+
+    renderTasks();
+
+    alert("নতুন টাস্ক যোগ হয়েছে।");
+
+}
+
+
+/* RENDER TASKS */
+
+function renderTasks(){
+
+    let list =
+    document.getElementById("adminTaskList");
+
+    list.innerHTML = "";
+
+
+    tasks.forEach(function(task,index){
+
+        list.innerHTML +=
+
+        `
+        <div class="task-row">
+
+            <b>${task.name}</b>
+
+            <br>
+
+            Reward: ৳${task.reward}
+
+            <button
+                onclick="deleteTask(${index})"
+            >
+                🗑️ মুছে ফেলুন
+            </button>
+
+        </div>
+        `;
+
+    });
+
+
+    document.getElementById("taskCount")
+    .innerText = tasks.length;
+
+}
+
+
+/* DELETE TASK */
+
+function deleteTask(index){
+
+    if(
+        confirm(
+            "এই টাস্কটি মুছে ফেলবেন?"
+        )
+    ){
+
+        tasks.splice(index,1);
+
+        localStorage.setItem(
+            "diyakool_tasks",
+            JSON.stringify(tasks)
         );
 
-        return;
+        renderTasks();
+
     }
+
+}
+
+
+/* WITHDRAW LIST */
+
+function renderWithdrawals(){
+
+    let box =
+    document
+    .getElementById("adminWithdrawList");
+
+    if(withdrawals.length === 0){
+
+        box.innerText =
+        "এখনো কোনো Withdraw Request নেই.";
+
+    }else{
+
+        box.innerHTML = "";
+
+        withdrawals.forEach(function(w,index){
+
+            box.innerHTML +=
+
+            `
+            <div class="task-row">
+
+                মাধ্যম: ${w.method}
+                <br>
+
+                নম্বর: ${w.number}
+                <br>
+
+                পরিমাণ: ৳${w.amount}
+                <br>
+
+                Status:
+                <span class="success">
+                    ${w.status}
+                </span>
+
+            </div>
+            `;
+
+        });
+
+    }
+
+
+    document
+    .getElementById("withdrawCount")
+    .innerText = withdrawals.length;
+
+}
+
+
+/* PROFILE */
+
+function saveProfile(){
+
+    let name =
+    document
+    .getElementById("name")
+    .value.trim();
+
+    let phone =
+    document
+    .getElementById("phone")
+    .value.trim();
 
 
     localStorage.setItem(
         "diyakool_name",
         name
     );
-
 
     localStorage.setItem(
         "diyakool_phone",
@@ -739,36 +807,66 @@ function saveProfile(){
 
 
     alert(
-        "আপনার তথ্য সংরক্ষণ হয়েছে।"
+        "তথ্য সংরক্ষণ হয়েছে।"
     );
 
 }
 
 
+/* ADMIN OPEN */
 
-/* ================= LOAD PROFILE ================= */
+function openAdmin(){
+
+    let password =
+    prompt(
+        "Admin Password দিন:"
+    );
+
+
+    /*
+      ডেমো পাসওয়ার্ড:
+      123456
+    */
+
+    if(password === "123456"){
+
+        showPage(
+            "admin",
+            document.querySelector(".nav button:last-child")
+        );
+
+    }else{
+
+        alert(
+            "ভুল Admin Password।"
+        );
+
+    }
+
+}
+
+
+/* LONG PRESS LOGIC */
+
+let pressTimer;
 
 document
-    .getElementById("name")
-    .value =
-    localStorage.getItem(
-        "diyakool_name"
-    ) || "";
-
-
-document
-    .getElementById("phone")
-    .value =
-    localStorage.getItem(
-        "diyakool_phone"
-    ) || "";
+.getElementById("profile")
+.addEventListener(
+    "dblclick",
+    openAdmin
+);
 
 
 /* START */
+
+renderTasks();
+
+renderWithdrawals();
 
 updateBalance();
 
 </script>
 
 </body>
-          </html>
+        </html>
