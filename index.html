@@ -1,1 +1,187 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>বন্ধু — অনলাইন আয় ও কাজ</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#10131a;
+  color:#fff;
+}
+
+.container{
+  width:100%;
+  max-width:480px;
+  min-height:100vh;
+  margin:auto;
+  padding:20px;
+}
+
+.header{
+  text-align:center;
+  padding:25px 10px;
+}
+
+.logo{
+  font-size:34px;
+  font-weight:bold;
+}
+
+.subtitle{
+  color:#b7bdc9;
+  margin-top:8px;
+}
+
+.card{
+  background:#191e28;
+  border:1px solid #303746;
+  border-radius:18px;
+  padding:22px;
+  margin-top:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+.balance-title{
+  color:#aeb5c2;
+  font-size:15px;
+}
+
+.balance{
+  font-size:35px;
+  font-weight:bold;
+  margin-top:8px;
+}
+
+.btn{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:15px;
+  margin-top:15px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+  background:#25d366;
+  color:#07100a;
+}
+
+.btn.secondary{
+  background:#252c39;
+  color:#fff;
+}
+
+.tasks{
+  display:grid;
+  gap:12px;
+  margin-top:15px;
+}
+
+.task{
+  background:#202631;
+  border-radius:14px;
+  padding:17px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.task-name{
+  font-weight:bold;
+}
+
+.reward{
+  color:#35e27b;
+  font-weight:bold;
+}
+
+.footer{
+  text-align:center;
+  color:#777f8d;
+  padding:30px 0;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="logo">বন্ধু ❤️</div>
+    <div class="subtitle">অনলাইন আয় ও কাজের প্ল্যাটফর্ম</div>
+  </div>
+
+  <div class="card">
+    <div class="balance-title">আমার ব্যালেন্স</div>
+    <div class="balance">৳ 0.00</div>
+
+    <button class="btn" onclick="login()">
+      লগইন / অ্যাকাউন্ট খুলুন
+    </button>
+
+    <button class="btn secondary" onclick="withdraw()">
+      টাকা উত্তোলন
+    </button>
+  </div>
+
+  <div class="card">
+    <h2>আজকের কাজ</h2>
+
+    <div class="tasks">
+
+      <div class="task">
+        <div>
+          <div class="task-name">🌐 ওয়েবসাইট ভিজিট</div>
+          <small>কাজ সম্পন্ন করলে</small>
+        </div>
+        <div class="reward">৳ 3</div>
+      </div>
+
+      <div class="task">
+        <div>
+          <div class="task-name">▶️ ভিডিও দেখুন</div>
+          <small>নির্ধারিত ভিডিও</small>
+        </div>
+        <div class="reward">৳ 5</div>
+      </div>
+
+      <div class="task">
+        <div>
+          <div class="task-name">📝 ছোট টাস্ক</div>
+          <small>নির্দেশনা অনুসরণ করুন</small>
+        </div>
+        <div class="reward">৳ 2</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    বন্ধু © 2026 — নিরাপদ ও স্বচ্ছ অনলাইন কাজ
+  </div>
+
+</div>
+
+<script>
+function login(){
+  alert("লগইন ব্যবস্থা পরের ধাপে Firebase-এর মাধ্যমে যুক্ত করা হবে।");
+}
+
+function withdraw(){
+  alert("উইথড্র ব্যবস্থা অ্যাকাউন্ট ও ব্যালেন্স সিস্টেম তৈরির পর যুক্ত হবে।");
+}
+</script>
+
+</body>
+</html>
