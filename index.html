@@ -395,7 +395,6 @@
         কাজের নির্দেশনা এখানে থাকবে।
       </p>
 
-
       <!-- COUNTDOWN -->
 
       <div
@@ -403,9 +402,8 @@
         class="countdown"
         style="display:none;"
       >
-        ⏳ অপেক্ষা করুন: ৩০ সেকেন্ড
+        ⏳ অপেক্ষা করুন
       </div>
-
 
       <!-- WATCH VIDEO BUTTON -->
 
@@ -418,7 +416,6 @@
       >
         ▶️ এখন ভিডিও দেখুন
       </button>
-
 
       <!-- VIDEO -->
 
@@ -438,13 +435,21 @@
 
       </div>
 
+      <!-- VIDEO WATCH TIMER -->
+
+      <div
+        id="videoTimer"
+        class="countdown"
+        style="display:none;"
+      >
+        🎬 ভিডিও দেখার সময়: ৩০ সেকেন্ড
+      </div>
 
       <!-- REWARD -->
 
       <div id="rewardBox" class="reward">
         🎁 এই কাজের পুরস্কার: ৳ 5.00
       </div>
-
 
       <!-- COMPLETE BUTTON -->
 
@@ -455,9 +460,8 @@
         onclick="completeTask()"
         disabled
       >
-        ⏳ আগে ৩০ সেকেন্ড অপেক্ষা করুন
+        ⏳ আগে অপেক্ষা করুন
       </button>
-
 
       <!-- BACK -->
 
@@ -482,29 +486,21 @@
      ব্যালেন্স
      ========================================= */
 
-  let balance = parseFloat(
-    localStorage.getItem("bondhu_balance")
-  ) || 0;
+  let balance =
+    parseFloat(localStorage.getItem("bondhu_balance")) || 0;
 
-
-  /* বর্তমানে কোন কাজ */
 
   let currentTask = "";
 
-
-  /* কাউন্টডাউন */
-
   let countdownTimer = null;
 
-
-  /* ৩০ সেকেন্ড শেষ হয়েছে কিনা */
+  let videoTimer = null;
 
   let countdownFinished = false;
 
-
-  /* ভিডিও দেখা শুরু হয়েছে কিনা */
-
   let videoStarted = false;
+
+  let videoWatchFinished = false;
 
 
   /* =========================================
@@ -557,34 +553,37 @@
 
 
   /* =========================================
-     কাউন্টডাউন বন্ধ
+     সব টাইমার বন্ধ
      ========================================= */
 
-  function stopCountdown() {
+  function stopTimers() {
 
     if (countdownTimer !== null) {
-
       clearInterval(countdownTimer);
-
       countdownTimer = null;
+    }
 
+    if (videoTimer !== null) {
+      clearInterval(videoTimer);
+      videoTimer = null;
     }
 
   }
 
 
   /* =========================================
-     ৩০ সেকেন্ড কাউন্টডাউন
+     ৩০ সেকেন্ড অপেক্ষা
      ========================================= */
 
   function startCountdown() {
 
-    stopCountdown();
+    stopTimers();
 
     let seconds = 30;
 
     countdownFinished = false;
     videoStarted = false;
+    videoWatchFinished = false;
 
     const countdown =
       document.getElementById("countdown");
@@ -595,31 +594,30 @@
     const watchButton =
       document.getElementById("watchButton");
 
+    const videoTimerBox =
+      document.getElementById("videoTimer");
+
 
     countdown.style.display = "block";
 
     countdown.classList.remove("ready");
 
-
     watchButton.style.display = "none";
 
+    videoTimerBox.style.display = "none";
 
     completeButton.disabled = true;
 
     completeButton.innerText =
       "⏳ ৩০ সেকেন্ড অপেক্ষা করুন";
 
-
     countdown.innerText =
-      "⏳ অপেক্ষা করুন: " +
-      seconds +
-      " সেকেন্ড";
+      "⏳ অপেক্ষা করুন: ৩০ সেকেন্ড";
 
 
     countdownTimer = setInterval(function() {
 
       seconds--;
-
 
       if (seconds > 0) {
 
@@ -637,16 +635,15 @@
 
       else {
 
-        stopCountdown();
+        clearInterval(countdownTimer);
+        countdownTimer = null;
 
         countdownFinished = true;
-
 
         countdown.classList.add("ready");
 
         countdown.innerText =
-          "✅ ৩০ সেকেন্ড শেষ! এখন ভিডিও দেখুন।";
-
+          "✅ অপেক্ষার সময় শেষ!";
 
         watchButton.style.display = "block";
 
@@ -680,6 +677,7 @@
 
 
     videoStarted = true;
+    videoWatchFinished = false;
 
 
     const videoContainer =
@@ -694,24 +692,96 @@
     const completeButton =
       document.getElementById("completeButton");
 
+    const videoTimerBox =
+      document.getElementById("videoTimer");
+
 
     watchButton.style.display = "none";
 
     videoContainer.style.display = "block";
+
+    videoTimerBox.style.display = "block";
 
 
     youtubeVideo.src =
       "https://www.youtube.com/embed/anroN-pcFEg?autoplay=1";
 
 
-    completeButton.disabled = false;
+    completeButton.disabled = true;
 
     completeButton.innerText =
-      "✅ ভিডিও দেখেছি — কাজ সম্পন্ন করুন";
+      "⏳ ভিডিও দেখুন";
 
 
-    document.getElementById("countdown").innerText =
-      "🎬 ভিডিও চলছে — ভিডিওটি দেখুন।";
+    startVideoWatchTimer();
+
+  }
+
+
+  /* =========================================
+     ভিডিও দেখার ৩০ সেকেন্ড
+     ========================================= */
+
+  function startVideoWatchTimer() {
+
+    if (videoTimer !== null) {
+
+      clearInterval(videoTimer);
+
+    }
+
+
+    let seconds = 30;
+
+
+    const videoTimerBox =
+      document.getElementById("videoTimer");
+
+    const completeButton =
+      document.getElementById("completeButton");
+
+
+    videoTimerBox.innerText =
+      "🎬 ভিডিও দেখার সময়: " +
+      seconds +
+      " সেকেন্ড";
+
+
+    videoTimer = setInterval(function() {
+
+      seconds--;
+
+
+      if (seconds > 0) {
+
+        videoTimerBox.innerText =
+          "🎬 ভিডিও দেখার সময়: " +
+          seconds +
+          " সেকেন্ড";
+
+      }
+
+      else {
+
+        clearInterval(videoTimer);
+        videoTimer = null;
+
+        videoWatchFinished = true;
+
+        videoTimerBox.classList.add("ready");
+
+        videoTimerBox.innerText =
+          "✅ ভিডিও দেখার সময় শেষ হয়েছে।";
+
+
+        completeButton.disabled = false;
+
+        completeButton.innerText =
+          "✅ ভিডিও দেখেছি — কাজ সম্পন্ন করুন";
+
+      }
+
+    }, 1000);
 
   }
 
@@ -722,7 +792,7 @@
 
   function openTask(type) {
 
-    stopCountdown();
+    stopTimers();
 
     currentTask = type;
 
@@ -744,14 +814,14 @@
 
     document.getElementById("youtubeVideo").src = "";
 
-
     document.getElementById("countdown").style.display =
       "none";
-
 
     document.getElementById("watchButton").style.display =
       "none";
 
+    document.getElementById("videoTimer").style.display =
+      "none";
 
     document.getElementById("completeButton").disabled =
       true;
@@ -762,12 +832,12 @@
 
 
     countdownFinished = false;
-
     videoStarted = false;
+    videoWatchFinished = false;
 
 
     /* =========================================
-       ভিডিও টাস্ক
+       ভিডিও
        ========================================= */
 
     if (type === "video") {
@@ -782,41 +852,34 @@
 
       document.getElementById("taskInstruction").innerText =
         "প্রথমে ৩০ সেকেন্ড অপেক্ষা করুন। " +
-        "৩০ সেকেন্ড শেষ হলে ভিডিও দেখার বাটনে চাপুন। " +
-        "তারপর ভিডিও দেখে কাজ সম্পন্ন করুন।";
+        "তারপর ভিডিও চালু করুন এবং কমপক্ষে " +
+        "৩০ সেকেন্ড ভিডিও দেখুন। " +
+        "সময় শেষ হলে কাজ সম্পন্ন করুন।";
 
 
       document.getElementById("rewardBox").innerText =
         "🎁 এই কাজের পুরস্কার: ৳ 5.00";
 
 
-      /* আগে সম্পন্ন হয়েছে */
-
       if (completedTasks.includes("video")) {
-
-        document.getElementById("completeButton").disabled =
-          true;
-
-
-        document.getElementById("completeButton").innerText =
-          "✅ এই কাজ ইতিমধ্যে সম্পন্ন";
-
 
         document.getElementById("countdown").style.display =
           "block";
 
-
         document.getElementById("countdown").classList.add("ready");
 
-
         document.getElementById("countdown").innerText =
-          "✅ এই কাজ ইতিমধ্যে সম্পন্ন হয়েছে।";
+          "✅ এই ভিডিও কাজ ইতিমধ্যে সম্পন্ন হয়েছে।";
+
+        document.getElementById("completeButton").disabled =
+          true;
+
+        document.getElementById("completeButton").innerText =
+          "✅ এই কাজ ইতিমধ্যে সম্পন্ন";
 
       }
 
       else {
-
-        /* ৩০ সেকেন্ড শুরু */
 
         startCountdown();
 
@@ -826,7 +889,7 @@
 
 
     /* =========================================
-       ওয়েবসাইট টাস্ক
+       ওয়েবসাইট
        ========================================= */
 
     else if (type === "website") {
@@ -923,7 +986,18 @@
     if (!videoStarted) {
 
       alert(
-        "▶️ আগে ভিডিও দেখার বাটনে চাপুন।"
+        "▶️ আগে ভিডিও চালু করুন।"
+      );
+
+      return;
+
+    }
+
+
+    if (!videoWatchFinished) {
+
+      alert(
+        "⏳ আগে কমপক্ষে ৩০ সেকেন্ড ভিডিও দেখুন।"
       );
 
       return;
@@ -942,12 +1016,9 @@
     }
 
 
-    /* =========================================
-       ৫ টাকা যোগ
-       ========================================= */
+    /* ৫ টাকা যোগ */
 
     balance = balance + 5;
-
 
     saveBalance();
 
@@ -960,12 +1031,12 @@
     updateBalance();
 
 
-    stopCountdown();
+    stopTimers();
 
 
     alert(
       "🎉 অভিনন্দন!\n\n" +
-      "আপনার কাজ সম্পন্ন হয়েছে।\n\n" +
+      "আপনার ভিডিও কাজ সম্পন্ন হয়েছে।\n\n" +
       "পুরস্কার: ৳ 5.00\n\n" +
       "বর্তমান ব্যালেন্স: ৳ " +
       balance.toFixed(2)
@@ -978,32 +1049,30 @@
 
 
   /* =========================================
-     হোমে ফিরে যাওয়া
+     হোমে ফিরে
      ========================================= */
 
   function goHome() {
 
-    stopCountdown();
+    stopTimers();
 
 
     document.getElementById("youtubeVideo").src = "";
 
-
     document.getElementById("videoContainer").style.display =
       "none";
-
 
     document.getElementById("watchButton").style.display =
       "none";
 
-
     document.getElementById("countdown").style.display =
       "none";
 
+    document.getElementById("videoTimer").style.display =
+      "none";
 
     document.getElementById("taskPage").style.display =
       "none";
-
 
     document.getElementById("homePage").style.display =
       "block";
@@ -1047,7 +1116,7 @@
 
 
   /* =========================================
-     শুরুতে ব্যালেন্স
+     শুরু
      ========================================= */
 
   updateBalance();
@@ -1055,4 +1124,4 @@
 </script>
 
 </body>
-      </html>
+  </html>
