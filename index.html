@@ -1,1 +1,1131 @@
+<!DOCTYPE html><html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>বন্ধু — অনলাইন আয় ও কাজ</title>  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
+    body {
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    .app {
+      max-width: 480px;
+      margin: auto;
+      min-height: 100vh;
+      background: #fff;
+    }
+
+    header {
+      background: #0759c9;
+      color: white;
+      padding: 22px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 25px;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 15px;
+    }
+
+    .balance {
+      margin: 18px 15px;
+      padding: 20px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #0759c9, #1689ff);
+      color: white;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+    }
+
+    .balance small {
+      font-size: 15px;
+    }
+
+    .balance h2 {
+      font-size: 32px;
+      margin-top: 7px;
+    }
+
+    .section-title {
+      padding: 10px 15px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .task {
+      margin: 12px 15px;
+      padding: 17px;
+      border: 1px solid #e1e6ed;
+      border-radius: 14px;
+      background: white;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    }
+
+    .task h3 {
+      font-size: 21px;
+      margin-bottom: 7px;
+    }
+
+    .task p {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .earn,
+    .complete-btn,
+    .back-btn,
+    .withdraw-btn {
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 13px;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .earn {
+      background: #0759c9;
+    }
+
+    .complete-btn {
+      background: #159447;
+      margin-top: 15px;
+    }
+
+    .complete-btn:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
+
+    .back-btn {
+      background: #555;
+      margin-top: 10px;
+    }
+
+    .earn:active,
+    .complete-btn:active,
+    .back-btn:active,
+    .withdraw-btn:active {
+      transform: scale(0.98);
+    }
+
+    .withdraw {
+      margin: 20px 15px;
+      padding: 20px;
+      text-align: center;
+      border-radius: 14px;
+      background: #f0f6ff;
+    }
+
+    .withdraw h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .withdraw p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .withdraw-btn {
+      margin-top: 10px;
+      background: #0759c9;
+    }
+
+    .task-page {
+      display: none;
+      padding-bottom: 30px;
+      min-height: 100vh;
+    }
+
+    .task-box {
+      margin: 20px 15px;
+      padding: 20px;
+      border-radius: 15px;
+      background: #f7f9fc;
+      border: 1px solid #e1e6ed;
+    }
+
+    .task-box h2 {
+      color: #0759c9;
+      margin-bottom: 12px;
+      font-size: 23px;
+    }
+
+    .task-box p {
+      line-height: 1.8;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .video-box {
+      margin: 15px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #youtubeVideo {
+      width: 100%;
+      height: 250px;
+      border: none;
+      display: block;
+    }
+
+    .countdown {
+      margin: 12px 0;
+      padding: 15px;
+      text-align: center;
+      border-radius: 10px;
+      background: #fff3cd;
+      color: #856404;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .countdown.ready {
+      background: #e8f5e9;
+      color: #167a38;
+    }
+
+    .reward {
+      margin: 15px 0;
+      padding: 14px;
+      text-align: center;
+      background: #e8f5e9;
+      border-radius: 10px;
+      color: #167a38;
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .notice {
+      display: none;
+      margin: 15px;
+      padding: 15px;
+      background: #0759c9;
+      color: white;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: 25px;
+      padding: 20px;
+      text-align: center;
+      background: #0759c9;
+      color: white;
+      font-size: 14px;
+    }
+  </style></head><body><div class="app">  <!-- HOME -->  <div id="homePage"><header>
+  <h1>বন্ধু</h1>
+  <p>অনলাইন আয় ও কাজ</p>
+</header>
+
+<div class="balance">
+  <small>আপনার ব্যালেন্স</small>
+  <h2 id="balance">৳ 0.00</h2>
+</div>
+
+<div id="notice" class="notice"></div>
+
+<div class="section-title">
+  উপলব্ধ কাজ
+</div>
+
+<div class="task">
+
+  <h3>🎬 ভিডিও দেখুন</h3>
+
+  <p>
+    ভিডিও সম্পূর্ণ দেখে কাজ শেষ করুন।
+    প্রতিটি সম্পন্ন ভিডিওর জন্য ৳ 5.00।
+  </p>
+
+  <button
+    class="earn"
+    type="button"
+    onclick="openTask('video')">
+    কাজ শুরু করুন
+  </button>
+
+</div>
+
+<div class="task">
+
+  <h3>🌐 ওয়েবসাইট ভিজিট</h3>
+
+  <p>
+    নির্দিষ্ট ওয়েবসাইট ভিজিট করে কাজ সম্পন্ন করুন।
+  </p>
+
+  <button
+    class="earn"
+    type="button"
+    onclick="openTask('website')">
+    কাজ শুরু করুন
+  </button>
+
+</div>
+
+<div class="task">
+
+  <h3>🎯 নতুন কাজ</h3>
+
+  <p>
+    নতুন কাজ এখানে যোগ করা হবে।
+  </p>
+
+  <button
+    class="earn"
+    type="button"
+    onclick="openTask('new')">
+    কাজ শুরু করুন
+  </button>
+
+</div>
+
+<div class="withdraw">
+
+  <h3>💰 টাকা উত্তোলন</h3>
+
+  <p>
+    আপনার ব্যালেন্স জমা হলে টাকা উত্তোলন করতে পারবেন।
+  </p>
+
+  <button
+    class="withdraw-btn"
+    type="button"
+    onclick="withdrawMoney()">
+    উত্তোলন করুন
+  </button>
+
+</div>
+
+<footer>
+  © 2026 বন্ধু — অনলাইন আয় ও কাজ
+</footer>
+
+  </div>  <!-- TASK PAGE -->  <div id="taskPage" class="task-page"><header>
+
+  <h1 id="taskTitle">
+    কাজ
+  </h1>
+
+  <p>
+    কাজটি সম্পন্ন করুন
+  </p>
+
+</header>
+
+<div class="task-box">
+
+  <h2 id="taskName">
+    কাজের নাম
+  </h2>
+
+  <p id="taskInstruction">
+    কাজের নির্দেশনা এখানে থাকবে।
+  </p>
+
+  <div
+    id="videoNumber"
+    class="countdown"
+    style="display:none;">
+    🎬 ভিডিও ১ / ১০
+  </div>
+
+  <div
+    id="videoContainer"
+    class="video-box"
+    style="display:none;">
+
+    <div id="youtubeVideo"></div>
+
+  </div>
+
+  <div
+    id="videoTimer"
+    class="countdown"
+    style="display:none;">
+    🎬 ভিডিও প্রস্তুত হচ্ছে...
+  </div>
+
+  <div id="rewardBox" class="reward">
+    🎁 এই কাজের পুরস্কার: ৳ 5.00
+  </div>
+
+  <button
+    id="completeButton"
+    class="complete-btn"
+    type="button"
+    onclick="completeTask()"
+    disabled>
+    ⏳ ভিডিও পুরোটা দেখুন
+  </button>
+
+  <button
+    class="back-btn"
+    type="button"
+    onclick="goHome()">
+    ← ফিরে যান
+  </button>
+
+</div>
+
+  </div></div><script src="https://www.youtube.com/iframe_api"></script><script>
+
+  /* =========================================
+     ব্যালেন্স
+     ========================================= */
+
+  let balance =
+    parseFloat(localStorage.getItem("bondhu_balance")) || 0;
+
+  let currentTask = "";
+
+  let currentVideoIndex =
+    parseInt(
+      localStorage.getItem("bondhu_video_index")
+    ) || 0;
+
+  let player = null;
+
+  let videoCompleted = false;
+
+  let videoStarted = false;
+
+  let lastKnownTime = 0;
+
+  let watchInterval = null;
+
+  let playerReady = false;
+
+  let loadingVideo = false;
+
+
+  /* =========================================
+     ১০টি ভিডিও
+     ========================================= */
+
+  const videoList = [
+
+    "VUfLQX2IuZY",
+    "_rkI7qS-8rg",
+    "9wE4yyMbJvM",
+    "O4bqKnQhwoU",
+    "d3d4_kT6Uf4",
+    "jISS56nMhDI",
+    "xmEaqmw0ujs",
+    "nusb1YvaXBQ",
+    "6eGZC2gdSk4",
+    "2HKSDrZdHTY"
+
+  ];
+
+
+  /* =========================================
+     BALANCE
+     ========================================= */
+
+  function updateBalance() {
+
+    document.getElementById("balance").innerText =
+      "৳ " + balance.toFixed(2);
+
+  }
+
+
+  function saveBalance() {
+
+    localStorage.setItem(
+      "bondhu_balance",
+      balance.toFixed(2)
+    );
+
+  }
+
+
+  /* =========================================
+     VIDEO INDEX
+     ========================================= */
+
+  function saveVideoIndex() {
+
+    localStorage.setItem(
+      "bondhu_video_index",
+      currentVideoIndex
+    );
+
+  }
+
+
+  /* =========================================
+     YOUTUBE API
+     ========================================= */
+
+  function onYouTubeIframeAPIReady() {
+
+    console.log("YouTube Player API Ready");
+
+  }
+
+
+  /* =========================================
+     OPEN TASK
+     ========================================= */
+
+  function openTask(type) {
+
+    currentTask = type;
+
+    document.getElementById("homePage").style.display =
+      "none";
+
+    document.getElementById("taskPage").style.display =
+      "block";
+
+    window.scrollTo(0, 0);
+
+    resetVideoPage();
+
+
+    if (type === "video") {
+
+      document.getElementById("taskTitle").innerText =
+        "🎬 ভিডিও টাস্ক";
+
+      document.getElementById("taskName").innerText =
+        "ভিডিও দেখুন";
+
+      document.getElementById("taskInstruction").innerText =
+        "ভিডিও শুরু থেকে শেষ পর্যন্ত দেখুন। " +
+        "মাঝখান থেকে এগিয়ে গেলে ভিডিও আবার আগের অবস্থানে যাবে।";
+
+      document.getElementById("rewardBox").innerText =
+        "🎁 এই ভিডিওর পুরস্কার: ৳ 5.00";
+
+      document.getElementById("videoNumber").style.display =
+        "block";
+
+      document.getElementById("videoNumber").innerText =
+        "🎬 ভিডিও " +
+        (currentVideoIndex + 1) +
+        " / " +
+        videoList.length;
+
+      document.getElementById("videoContainer").style.display =
+        "block";
+
+      document.getElementById("videoTimer").style.display =
+        "block";
+
+      document.getElementById("completeButton").disabled =
+        true;
+
+      document.getElementById("completeButton").innerText =
+        "⏳ ভিডিও পুরোটা দেখুন";
+
+      loadVideo();
+
+    }
+
+
+    else if (type === "website") {
+
+      document.getElementById("taskTitle").innerText =
+        "🌐 ওয়েবসাইট টাস্ক";
+
+      document.getElementById("taskName").innerText =
+        "ওয়েবসাইট ভিজিট";
+
+      document.getElementById("taskInstruction").innerText =
+        "এই কাজটি এখনো চালু করা হয়নি। শীঘ্রই কাজটি চালু হবে।";
+
+      document.getElementById("rewardBox").innerText =
+        "🎁 এই কাজটি শীঘ্রই চালু হবে";
+
+      document.getElementById("completeButton").disabled =
+        true;
+
+      document.getElementById("completeButton").innerText =
+        "⏳ শীঘ্রই চালু হবে";
+
+    }
+
+
+    else {
+
+      document.getElementById("taskTitle").innerText =
+        "🎯 নতুন কাজ";
+
+      document.getElementById("taskName").innerText =
+        "নতুন কাজ";
+
+      document.getElementById("taskInstruction").innerText =
+        "এই কাজটি শীঘ্রই চালু করা হবে।";
+
+      document.getElementById("rewardBox").innerText =
+        "🎁 কাজটি এখনো চালু হয়নি";
+
+      document.getElementById("completeButton").disabled =
+        true;
+
+      document.getElementById("completeButton").innerText =
+        "⏳ শীঘ্রই চালু হবে";
+
+    }
+
+  }
+
+
+  /* =========================================
+     LOAD VIDEO
+     ========================================= */
+
+  function loadVideo() {
+
+    videoCompleted = false;
+    videoStarted = false;
+    lastKnownTime = 0;
+    loadingVideo = true;
+
+    const videoId =
+      videoList[currentVideoIndex];
+
+
+    if (player && playerReady) {
+
+      try {
+
+        player.loadVideoById({
+          videoId: videoId,
+          startSeconds: 0
+        });
+
+        loadingVideo = false;
+
+      }
+
+      catch(error) {
+
+        console.log(error);
+        createPlayer(videoId);
+
+      }
+
+    }
+
+    else {
+
+      createPlayer(videoId);
+
+    }
+
+  }
+
+
+  /* =========================================
+     CREATE PLAYER
+     ========================================= */
+
+  function createPlayer(videoId) {
+
+    playerReady = false;
+
+    player = new YT.Player(
+      "youtubeVideo",
+      {
+
+        height: "250",
+        width: "100%",
+        videoId: videoId,
+
+        playerVars: {
+
+          autoplay: 0,
+          controls: 1,
+          rel: 0,
+          modestbranding: 1
+
+        },
+
+        events: {
+
+          onReady: onPlayerReady,
+          onStateChange: onPlayerStateChange
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* =========================================
+     PLAYER READY
+     ========================================= */
+
+  function onPlayerReady(event) {
+
+    playerReady = true;
+
+    videoStarted = false;
+    videoCompleted = false;
+    lastKnownTime = 0;
+
+    document.getElementById("videoTimer").classList.remove(
+      "ready"
+    );
+
+    document.getElementById("videoTimer").innerText =
+      "▶️ ভিডিও শুরু করুন";
+
+    document.getElementById("completeButton").disabled =
+      true;
+
+    document.getElementById("completeButton").innerText =
+      "⏳ ভিডিও পুরোটা দেখুন";
+
+  }
+
+
+  /* =========================================
+     PLAYER STATE CHANGE
+     ========================================= */
+
+  function onPlayerStateChange(event) {
+
+    if (event.data === YT.PlayerState.PLAYING) {
+
+      videoStarted = true;
+
+      startWatchChecker();
+
+      document.getElementById("videoTimer").classList.remove(
+        "ready"
+      );
+
+      document.getElementById("videoTimer").innerText =
+        "🎬 ভিডিও চলছে... পুরো ভিডিওটি দেখুন";
+
+    }
+
+
+    if (event.data === YT.PlayerState.PAUSED) {
+
+      stopWatchChecker();
+
+      document.getElementById("videoTimer").innerText =
+        "⏸️ ভিডিও বন্ধ আছে — আবার চালু করুন";
+
+    }
+
+
+    if (event.data === YT.PlayerState.BUFFERING) {
+
+      document.getElementById("videoTimer").innerText =
+        "⏳ ভিডিও লোড হচ্ছে...";
+
+    }
+
+
+    if (event.data === YT.PlayerState.ENDED) {
+
+      stopWatchChecker();
+
+      /*
+        ভিডিও সত্যিই শেষ হয়েছে কিনা
+        সেটি যাচাই করা হচ্ছে।
+      */
+
+      let duration = 0;
+
+      try {
+        duration = player.getDuration();
+      } catch(error) {}
+
+      if (
+        duration > 0 &&
+        lastKnownTime >= duration - 3
+      ) {
+
+        videoCompleted = true;
+
+        document.getElementById("videoTimer").classList.add(
+          "ready"
+        );
+
+        document.getElementById("videoTimer").innerText =
+          "✅ ভিডিও সম্পূর্ণ দেখা হয়েছে!";
+
+        document.getElementById("completeButton").disabled =
+          false;
+
+        document.getElementById("completeButton").innerText =
+          "💰 ৳৫ নিয়ে কাজ সম্পন্ন করুন";
+
+      }
+
+      else {
+
+        videoCompleted = false;
+
+        document.getElementById("completeButton").disabled =
+          true;
+
+        document.getElementById("completeButton").innerText =
+          "⏳ ভিডিও পুরোটা দেখুন";
+
+      }
+
+    }
+
+  }
+
+
+  /* =========================================
+     WATCH CHECKER
+     ========================================= */
+
+  function startWatchChecker() {
+
+    stopWatchChecker();
+
+
+    watchInterval =
+      setInterval(function() {
+
+        if (!player || !videoStarted || videoCompleted) {
+          return;
+        }
+
+
+        try {
+
+          const currentTime =
+            player.getCurrentTime();
+
+          const duration =
+            player.getDuration();
+
+
+          /*
+            ব্যবহারকারী যদি ভিডিও
+            সামনে টেনে নিয়ে যায়,
+            তাহলে আগের অবস্থানে ফেরত যাবে।
+          */
+
+          if (
+            currentTime >
+            lastKnownTime + 3
+          ) {
+
+            player.seekTo(
+              lastKnownTime,
+              true
+            );
+
+            document.getElementById("videoTimer").innerText =
+              "⚠️ ভিডিও স্কিপ করা যাবে না — ভিডিওটি ধারাবাহিকভাবে দেখুন";
+
+            return;
+
+          }
+
+
+          /*
+            স্বাভাবিকভাবে ভিডিও চলছে।
+          */
+
+          if (
+            currentTime >= lastKnownTime
+          ) {
+
+            lastKnownTime =
+              currentTime;
+
+          }
+
+
+          /*
+            শেষের কাছাকাছি পৌঁছালে
+            ভিডিও শেষ হওয়ার জন্য অপেক্ষা করবে।
+          */
+
+          if (
+            duration > 0 &&
+            currentTime >= duration - 2
+          ) {
+
+            document.getElementById("videoTimer").innerText =
+              "⏳ ভিডিও শেষ হচ্ছে...";
+
+          }
+
+        }
+
+        catch(error) {
+
+          console.log(error);
+
+        }
+
+      }, 1000);
+
+  }
+
+
+  function stopWatchChecker() {
+
+    if (watchInterval !== null) {
+
+      clearInterval(watchInterval);
+
+      watchInterval = null;
+
+    }
+
+  }
+
+
+  /* =========================================
+     COMPLETE TASK
+     ========================================= */
+
+  function completeTask() {
+
+    if (currentTask !== "video") {
+
+      alert(
+        "⏳ এই কাজটি এখনো চালু হয়নি।"
+      );
+
+      return;
+
+    }
+
+
+    if (!videoStarted) {
+
+      alert(
+        "▶️ আগে ভিডিও চালু করুন।"
+      );
+
+      return;
+
+    }
+
+
+    if (!videoCompleted) {
+
+      alert(
+        "⏳ আগে পুরো ভিডিওটি শেষ পর্যন্ত দেখুন।"
+      );
+
+      return;
+
+    }
+
+
+    /*
+      ডাবল ক্লিক আটকানো
+    */
+
+    document.getElementById("completeButton").disabled =
+      true;
+
+
+    /* =========================================
+       ADD 5 TAKA
+       ========================================= */
+
+    balance += 5;
+
+    saveBalance();
+
+
+    /* =========================================
+       NEXT VIDEO
+       ========================================= */
+
+    currentVideoIndex++;
+
+
+    if (
+      currentVideoIndex >=
+      videoList.length
+    ) {
+
+      currentVideoIndex = 0;
+
+    }
+
+
+    saveVideoIndex();
+
+    updateBalance();
+
+    stopWatchChecker();
+
+
+    if (player) {
+
+      try {
+
+        player.stopVideo();
+
+      }
+
+      catch(error) {}
+
+    }
+
+
+    alert(
+      "🎉 অভিনন্দন!\n\n" +
+      "ভিডিও সম্পন্ন হয়েছে।\n\n" +
+      "পুরস্কার: ৳ 5.00\n\n" +
+      "বর্তমান ব্যালেন্স: ৳ " +
+      balance.toFixed(2) +
+      "\n\n▶️ এবার পরের ভিডিও আসবে।"
+    );
+
+
+    /*
+      পরের ভিডিও সরাসরি চালু
+    */
+
+    openTask("video");
+
+  }
+
+
+  /* =========================================
+     RESET VIDEO PAGE
+     ========================================= */
+
+  function resetVideoPage() {
+
+    stopWatchChecker();
+
+    videoCompleted = false;
+    videoStarted = false;
+    lastKnownTime = 0;
+
+
+    document.getElementById("videoContainer").style.display =
+      "none";
+
+    document.getElementById("videoTimer").style.display =
+      "none";
+
+    document.getElementById("videoTimer").classList.remove(
+      "ready"
+    );
+
+    document.getElementById("videoNumber").style.display =
+      "none";
+
+    document.getElementById("completeButton").disabled =
+      true;
+
+    document.getElementById("completeButton").innerText =
+      "⏳ ভিডিও পুরোটা দেখুন";
+
+  }
+
+
+  /* =========================================
+     HOME
+     ========================================= */
+
+  function goHome() {
+
+    stopWatchChecker();
+
+
+    if (player) {
+
+      try {
+
+        player.stopVideo();
+
+      }
+
+      catch(error) {}
+
+    }
+
+
+    document.getElementById("taskPage").style.display =
+      "none";
+
+    document.getElementById("homePage").style.display =
+      "block";
+
+
+    updateBalance();
+
+    window.scrollTo(0, 0);
+
+  }
+
+
+  /* =========================================
+     WITHDRAW
+     ========================================= */
+
+  function withdrawMoney() {
+
+    if (balance < 50) {
+
+      alert(
+        "💰 টাকা উত্তোলন\n\n" +
+        "ন্যূনতম উত্তোলন সীমা ৳ 50.00।\n\n" +
+        "আপনার বর্তমান ব্যালেন্স: ৳ " +
+        balance.toFixed(2)
+      );
+
+      return;
+
+    }
+
+
+    alert(
+      "💰 টাকা উত্তোলন\n\n" +
+      "উত্তোলন ব্যবস্থা পরবর্তী ধাপে যুক্ত করা হবে।"
+    );
+
+  }
+
+
+  /* =========================================
+     START
+     ========================================= */
+
+  updateBalance();
+
+</script></body>
+  </html>
