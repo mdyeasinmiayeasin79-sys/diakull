@@ -14,7 +14,30 @@
       font-family: Arial, sans-serif;
     }
 
-    body {
+    body {<script>
+  document.querySelectorAll(".earn").forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+      const task = button.parentElement
+        .querySelector("h3").innerText;
+
+      if (task === "ভিডিও দেখুন") {
+        alert("ভিডিও টাস্ক শীঘ্রই চালু হবে ❤️");
+      }
+
+      else if (task === "ওয়েবসাইট ভিজিট") {
+        alert("ওয়েবসাইট ভিজিট টাস্ক শীঘ্রই চালু হবে 🌐");
+      }
+
+      else {
+        alert("নতুন কাজ শীঘ্রই যোগ করা হবে 🎯");
+      }
+
+    });
+
+  });
+</script>
       background: #f4f7fb;
       color: #222;
     }
@@ -241,3 +264,34 @@
 
 </body>
   </html>
+</nav>
+
+</div>
+
+<script>
+  document.querySelectorAll(".earn").forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+      const task = button.parentElement
+        .querySelector("h3").innerText;
+
+      if (task === "ভিডিও দেখুন") {
+        alert("ভিডিও টাস্ক শীঘ্রই চালু হবে ❤️");
+      }
+
+      else if (task === "ওয়েবসাইট ভিজিট") {
+        alert("ওয়েবসাইট ভিজিট টাস্ক শীঘ্রই চালু হবে 🌐");
+      }
+
+      else {
+        alert("নতুন কাজ শীঘ্রই যোগ করা হবে 🎯");
+      }
+
+    });
+
+  });
+</script>
+
+</body>
+</html>
