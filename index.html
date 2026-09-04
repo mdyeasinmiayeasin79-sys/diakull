@@ -1,1 +1,596 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>বন্ধু — অনলাইন আয় ও কাজ</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    .app {
+      max-width: 480px;
+      margin: auto;
+      min-height: 100vh;
+      background: #fff;
+    }
+
+    header {
+      background: #0759c9;
+      color: white;
+      padding: 22px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 25px;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 15px;
+    }
+
+    .balance {
+      margin: 18px 15px;
+      padding: 20px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #0759c9, #1689ff);
+      color: white;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+    }
+
+    .balance small {
+      font-size: 15px;
+    }
+
+    .balance h2 {
+      font-size: 32px;
+      margin-top: 7px;
+    }
+
+    .section-title {
+      padding: 10px 15px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .task {
+      margin: 12px 15px;
+      padding: 17px;
+      border: 1px solid #e1e6ed;
+      border-radius: 14px;
+      background: white;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    }
+
+    .task h3 {
+      font-size: 21px;
+      margin-bottom: 7px;
+    }
+
+    .task p {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .earn,
+    .complete-btn,
+    .back-btn,
+    .withdraw-btn {
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 13px;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .earn {
+      background: #0759c9;
+    }
+
+    .earn:active,
+    .complete-btn:active,
+    .back-btn:active,
+    .withdraw-btn:active {
+      transform: scale(0.98);
+    }
+
+    .complete-btn {
+      background: #159447;
+      margin-top: 15px;
+    }
+
+    .back-btn {
+      background: #555;
+      margin-top: 10px;
+    }
+
+    .withdraw {
+      margin: 20px 15px;
+      padding: 20px;
+      text-align: center;
+      border-radius: 14px;
+      background: #f0f6ff;
+    }
+
+    .withdraw h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .withdraw p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .withdraw-btn {
+      margin-top: 10px;
+      background: #0759c9;
+    }
+
+    .task-page {
+      display: none;
+      padding-bottom: 30px;
+      min-height: 100vh;
+    }
+
+    .task-box {
+      margin: 20px 15px;
+      padding: 20px;
+      border-radius: 15px;
+      background: #f7f9fc;
+      border: 1px solid #e1e6ed;
+    }
+
+    .task-box h2 {
+      color: #0759c9;
+      margin-bottom: 12px;
+      font-size: 23px;
+    }
+
+    .task-box p {
+      line-height: 1.8;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .reward {
+      margin: 15px 0;
+      padding: 14px;
+      text-align: center;
+      background: #e8f5e9;
+      border-radius: 10px;
+      color: #167a38;
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .notice {
+      display: none;
+      margin: 15px;
+      padding: 15px;
+      background: #0759c9;
+      color: white;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: 25px;
+      padding: 20px;
+      text-align: center;
+      background: #0759c9;
+      color: white;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- =========================
+       HOME PAGE
+  ========================== -->
+  <div id="homePage">
+
+    <header>
+      <h1>বন্ধু</h1>
+      <p>অনলাইন আয় ও কাজ</p>
+    </header>
+
+    <div class="balance">
+      <small>আপনার ব্যালেন্স</small>
+      <h2 id="balance">৳ 0.00</h2>
+    </div>
+
+    <div id="notice" class="notice"></div>
+
+    <div class="section-title">
+      উপলব্ধ কাজ
+    </div>
+
+
+    <!-- =========================
+         VIDEO TASK
+    ========================== -->
+    <div class="task">
+
+      <h3>🎬 ভিডিও দেখুন</h3>
+
+      <p>
+        ভিডিও দেখে কাজ সম্পন্ন করার সুযোগ।
+      </p>
+
+      <button
+        class="earn"
+        type="button"
+        onclick="openTask('video')"
+      >
+        কাজ শুরু করুন
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         WEBSITE TASK
+    ========================== -->
+    <div class="task">
+
+      <h3>🌐 ওয়েবসাইট ভিজিট</h3>
+
+      <p>
+        নির্দিষ্ট ওয়েবসাইট ভিজিট করে কাজ সম্পন্ন করুন।
+      </p>
+
+      <button
+        class="earn"
+        type="button"
+        onclick="openTask('website')"
+      >
+        কাজ শুরু করুন
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         NEW TASK
+    ========================== -->
+    <div class="task">
+
+      <h3>🎯 নতুন কাজ</h3>
+
+      <p>
+        নতুন কাজ এখানে যোগ করা হবে।
+      </p>
+
+      <button
+        class="earn"
+        type="button"
+        onclick="openTask('new')"
+      >
+        কাজ শুরু করুন
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         WITHDRAW
+    ========================== -->
+    <div class="withdraw">
+
+      <h3>💰 টাকা উত্তোলন</h3>
+
+      <p>
+        আপনার ব্যালেন্স জমা হলে টাকা উত্তোলন করতে পারবেন।
+      </p>
+
+      <button
+        class="withdraw-btn"
+        type="button"
+        onclick="withdrawMoney()"
+      >
+        উত্তোলন করুন
+      </button>
+
+    </div>
+
+
+    <footer>
+      © 2026 বন্ধু — অনলাইন আয় ও কাজ
+    </footer>
+
+  </div>
+
+
+  <!-- =========================
+       TASK PAGE
+  ========================== -->
+  <div id="taskPage" class="task-page">
+
+    <header>
+
+      <h1 id="taskTitle">
+        কাজ
+      </h1>
+
+      <p>
+        কাজটি সম্পন্ন করুন
+      </p>
+
+    </header>
+
+
+    <div class="task-box">
+
+      <h2 id="taskName">
+        কাজের নাম
+      </h2>
+
+
+      <p id="taskInstruction">
+        কাজের নির্দেশনা এখানে থাকবে।
+      </p>
+
+
+      <div class="reward">
+        🎁 এই কাজের পুরস্কার: ৳ 5.00
+      </div>
+
+
+      <button
+        class="complete-btn"
+        type="button"
+        onclick="completeTask()"
+      >
+        ✅ কাজ সম্পন্ন করেছি
+      </button>
+
+
+      <button
+        class="back-btn"
+        type="button"
+        onclick="goHome()"
+      >
+        ← ফিরে যান
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  /* =================================
+     বর্তমান ব্যালেন্স
+  ================================= */
+
+  let balance = 0;
+
+
+  /* =================================
+     বর্তমানে কোন কাজ খোলা
+  ================================= */
+
+  let currentTask = "";
+
+
+  /* =================================
+     ব্যালেন্স দেখানো
+  ================================= */
+
+  function updateBalance() {
+
+    document.getElementById("balance").innerText =
+      "৳ " + balance.toFixed(2);
+
+  }
+
+
+  /* =================================
+     ছোট নোটিশ দেখানো
+  ================================= */
+
+  function showNotice(message) {
+
+    const notice = document.getElementById("notice");
+
+    notice.innerHTML = message;
+
+    notice.style.display = "block";
+
+    setTimeout(function() {
+
+      notice.style.display = "none";
+
+    }, 3000);
+
+  }
+
+
+  /* =================================
+     টাস্ক খোলা
+  ================================= */
+
+  function openTask(type) {
+
+    currentTask = type;
+
+    document.getElementById("homePage").style.display = "none";
+
+    document.getElementById("taskPage").style.display = "block";
+
+
+    /* ভিডিও */
+
+    if (type === "video") {
+
+      document.getElementById("taskTitle").innerText =
+        "🎬 ভিডিও টাস্ক";
+
+      document.getElementById("taskName").innerText =
+        "ভিডিও দেখুন";
+
+      document.getElementById("taskInstruction").innerText =
+        "নির্দেশনা: ভিডিওটি সম্পূর্ণ দেখুন। " +
+        "ভিডিও দেখা শেষ হলে নিচের " +
+        "'কাজ সম্পন্ন করেছি' বাটনে চাপুন।";
+
+    }
+
+
+    /* ওয়েবসাইট */
+
+    else if (type === "website") {
+
+      document.getElementById("taskTitle").innerText =
+        "🌐 ওয়েবসাইট টাস্ক";
+
+      document.getElementById("taskName").innerText =
+        "ওয়েবসাইট ভিজিট";
+
+      document.getElementById("taskInstruction").innerText =
+        "নির্দেশনা: নির্দিষ্ট ওয়েবসাইট ভিজিট করুন। " +
+        "কাজের সময়সীমা শেষ হলে নিচের বাটনে চাপুন।";
+
+    }
+
+
+    /* নতুন কাজ */
+
+    else {
+
+      document.getElementById("taskTitle").innerText =
+        "🎯 নতুন কাজ";
+
+      document.getElementById("taskName").innerText =
+        "নতুন কাজ";
+
+      document.getElementById("taskInstruction").innerText =
+        "এই কাজটি শীঘ্রই বিস্তারিতভাবে চালু করা হবে।";
+
+    }
+
+  }
+
+
+  /* =================================
+     কাজ সম্পন্ন
+  ================================= */
+
+  function completeTask() {
+
+    /*
+      গুরুত্বপূর্ণ:
+      এটি এখন DEMO হিসাব।
+
+      পরে আসল সার্ভার/ডাটাবেস যুক্ত হলে
+      তখন কাজ যাচাই করে ব্যালেন্স দেওয়া যাবে।
+    */
+
+
+    balance = balance + 5;
+
+
+    updateBalance();
+
+
+    alert(
+      "🎉 অভিনন্দন!\n\n" +
+      "আপনার কাজ সম্পন্ন হয়েছে।\n\n" +
+      "পুরস্কার: ৳ 5.00\n\n" +
+      "বর্তমান ব্যালেন্স: ৳ " +
+      balance.toFixed(2)
+    );
+
+
+    goHome();
+
+  }
+
+
+  /* =================================
+     হোমে ফিরে যাওয়া
+  ================================= */
+
+  function goHome() {
+
+    document.getElementById("taskPage").style.display =
+      "none";
+
+    document.getElementById("homePage").style.display =
+      "block";
+
+  }
+
+
+  /* =================================
+     টাকা উত্তোলন
+  ================================= */
+
+  function withdrawMoney() {
+
+    if (balance < 50) {
+
+      alert(
+        "💰 টাকা উত্তোলন\n\n" +
+        "ন্যূনতম উত্তোলন সীমা ৳ 50.00।\n\n" +
+        "আপনার বর্তমান ব্যালেন্স: ৳ " +
+        balance.toFixed(2)
+      );
+
+      return;
+
+    }
+
+
+    alert(
+      "💰 টাকা উত্তোলন\n\n" +
+      "আপনার উত্তোলনের অনুরোধ গ্রহণের ব্যবস্থা " +
+      "পরবর্তী ধাপে যুক্ত করা হবে।"
+    );
+
+  }
+
+
+  /* =================================
+     প্রথমবার ব্যালেন্স দেখানো
+  ================================= */
+
+  updateBalance();
+
+</script>
+
+</body>
+        </html>
